@@ -1,0 +1,49 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="calcWrapper">
+    <div class="inputWrapper flex-column">
+        <input type="text" name="calcInput" readonly/>
+    </div>
+    <div class="buttonsWrapper flex-row">
+        <div class="numPad">
+            @for(int i=1; i<=10; i++)
+            {
+                <button class="num num_@(i%10)">@(i%10)</button>
+            }
+            <button class="back">&#8592;</button>
+            <button class="clear">AC</button>
+        </div>
+        <div class="operationsWrapper flex-column">
+            <button class="multiply">X</button>
+            <button class="divide">/</button>
+            <button class="add">+</button>
+            <button class="subtract">-</button>
+            <button class="sum">=</button>
+        </div>
+        <div>@Url.Action("Calculate")</div>
+    </div>
+</div>
+
+<script>
+    function calculate(equation) {
+        $.ajax({
+            type: "Post",
+            url: "/Calc",
+                data: JSON.stringify(equation),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+            success: function (msg) {
+                console.log(msg["value"]);
+                $("input").val(msg["value"] + stackChar);
+                stackChar = "";
+            },
+            error: function (msg) {
+                console.log(msg);
+            }
+        })
+    }
+</script>
