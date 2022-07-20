@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Autofac;
 
 namespace Calc.Controllers
 {
@@ -9,13 +9,17 @@ namespace Calc.Controllers
     {
         public JsonResult Post([FromBody] string equation)
         {
+            var conatiner = ContainerConfig.ConfigureController();
             double? result = null;
-            EquationParser equationParser = new EquationParser(equation);
-            if (equationParser.Valid())
+            using (var scope = conatiner.BeginLifetimeScope())
             {
-                result = new Calculator(equationParser.Operator).Calculate((double)equationParser.FirstOperand, (double)equationParser.SecondOperand);
+                IEquationParser equationParser = scope.Resolve<IEquationParser>(new TypedParameter(typeof(string), equation));
+                if (equationParser.Valid())
+                {
+                    var calc = scope.Resolve<ICalc>(new TypedParameter(typeof(ICalcOperator), equationParser.Operator));
+                    result = calc.Calculate((double)equationParser.FirstOperand, (double)equationParser.SecondOperand);
+                }
             }
-
             return new JsonResult(Ok(result));
         }
     }

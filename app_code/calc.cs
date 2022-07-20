@@ -1,4 +1,7 @@
-﻿public interface ICalc {
+﻿using Autofac;
+using System.Text.RegularExpressions;
+
+public interface ICalc {
     public double? Calculate (double x, double y);
 }
 
@@ -9,6 +12,9 @@ public interface ICalcOperator
 
 public interface IEquationParser
 {
+    ICalcOperator? Operator { get; set; }
+    double? FirstOperand { get; set; }
+    double? SecondOperand { get; set; }
     public void Parse(string equation);
     public Boolean Valid();
 }
@@ -66,43 +72,31 @@ public class Divide : ICalcOperator
 
 public class EquationParser: IEquationParser
 {
-    public double? FirstOperand = null;
-    public double? SecondOperand = null;
-    public ICalcOperator? Operator = null;
+    public ICalcOperator? Operator { get; set; }
+    public double? FirstOperand { get; set; }
+    public double? SecondOperand { get; set; }
 
     public EquationParser(string equation)
     {
         Parse(equation);
     }
 
+
     public void Parse(string equation)
     {
-        char[] operators = new char[] { 'X', '/', '+', '-' };
-        var index = Array.FindIndex(operators, x => equation.Contains(x));
-        char operandSymbol;
-        if (index == -1)
+        Regex regex = new Regex("([0-9 /.]+)(.)([0-9 /.]+)");
+        Match match = regex.Match(equation);
+        if (!match.Success)
         {
             return;
         }
 
-        operandSymbol = operators[index];
-        var operands = equation.Split(operandSymbol).ToArray();
-        FirstOperand = Double.Parse(operands[0]);
-        SecondOperand = Double.Parse(operands[1]);
-        switch (operandSymbol)
+        FirstOperand = Double.Parse(match.Groups[1].Value);
+        SecondOperand = Double.Parse(match.Groups[3].Value);
+        var container = ContainerConfig.ConfigureOperator();
+        using (var scope = container.BeginLifetimeScope())
         {
-            case 'X':
-                Operator = new Multiply();
-                break;
-            case '/':
-                Operator = new Divide();
-                break;
-            case '+':
-                Operator = new Add();
-                break;
-            case '-':
-                Operator = new Substract();
-                break;
+            Operator = scope.ResolveKeyed<ICalcOperator>(match.Groups[2].Value);
         }
     }
 

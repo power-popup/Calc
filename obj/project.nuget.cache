@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "Q4180AecpoIpo/oWLzaJDVbdroV1vdifrpaS5Fn5Grnejd8C0LO17/RslLj3LAhE/8IIpkZPu/l+ngVYYubOWw==",
+  "dgSpecHash": "Q/szASz49o9glpiW2SSj2awacvBcKGQ6I6vpAXmXa9DKZVbyimGmdM7Z368IqS/HDUjh1E0/n3BoXLBHFJ6KlA==",
   "success": true,
   "projectFilePath": "C:\\Users\\eli ran\\source\\repos\\Calc\\Calc.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\eli ran\\.nuget\\packages\\autofac\\6.4.0\\autofac.6.4.0.nupkg.sha512",
+    "C:\\Users\\eli ran\\.nuget\\packages\\system.diagnostics.diagnosticsource\\4.7.1\\system.diagnostics.diagnosticsource.4.7.1.nupkg.sha512"
+  ],
   "logs": []
 }
