@@ -75,3 +75,7 @@ input {
     justify-content: space-around;
     padding-top: 25px
 }
+
+button:disabled {
+    background-color: darkgrey;
+}

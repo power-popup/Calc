@@ -38,7 +38,14 @@
                 dataType: "json",
             success: function (msg) {
                 console.log(msg["value"]);
-                $("input").val(msg["value"] + stackChar);
+                if (msg["value"] == null) {
+                    console.log("entered");
+                    $("input").val("NaN");
+                    halt(true);
+                }
+                else {
+                    $("input").val(msg["value"] + stackChar);
+                }
                 stackChar = "";
             },
             error: function (msg) {
