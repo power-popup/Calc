@@ -26,3 +26,4 @@ C:\Users\eli ran\source\repos\Calc\obj\Debug\net6.0\Calc.genruntimeconfig.cache
 C:\Users\eli ran\source\repos\Calc\obj\Debug\net6.0\ref\Calc.dll
 C:\Users\eli ran\source\repos\Calc\bin\Debug\net6.0\Autofac.dll
 C:\Users\eli ran\source\repos\Calc\obj\Debug\net6.0\Calc.csproj.CopyComplete
+C:\Users\eli ran\source\repos\Calc\bin\Debug\net6.0\Autofac.Extensions.DependencyInjection.dll

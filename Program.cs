@@ -1,4 +1,10 @@
-var builder = WebApplication.CreateBuilder(args);
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+
+var builder = WebApplication.CreateBuilder(args); ;
+
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+builder.Host.ConfigureContainer<ContainerBuilder>(builder => builder.RegisterModule(new AutofacContainerConfig()));
 
 // Add services to the container.
 builder.Services.AddRazorPages();

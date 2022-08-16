@@ -1,7 +1,7 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Calculator";
 }
 
 <div class="calcWrapper">
@@ -37,9 +37,10 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
             success: function (msg) {
-                console.log(msg["value"]);
-                if (msg["value"] == null) {
-                    console.log("entered");
+                if (msg["success"] == "False") {
+                    console.log(msg["responseText"]);
+                }
+                else if (msg["value"] == null) {
                     $("input").val("NaN");
                     halt(true);
                 }
@@ -47,9 +48,6 @@
                     $("input").val(msg["value"] + stackChar);
                 }
                 stackChar = "";
-            },
-            error: function (msg) {
-                console.log(msg);
             }
         })
     }

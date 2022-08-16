@@ -7,19 +7,23 @@ namespace Calc.Controllers
     [Route("[controller]")]
     public class CalcController : ControllerBase
     {
+        private readonly ICalcFlowManager _calcFlowManager;
+        public CalcController(ICalcFlowManager calcFlowManager)
+        {
+            _calcFlowManager = calcFlowManager;
+        }
         public JsonResult Post([FromBody] string equation)
         {
-            var conatiner = ContainerConfig.ConfigureController();
-            double? result = null;
-            using (var scope = conatiner.BeginLifetimeScope())
+            double result;
+            try
             {
-                IEquationParser equationParser = scope.Resolve<IEquationParser>(new TypedParameter(typeof(string), equation));
-                if (equationParser.Valid())
-                {
-                    var calc = scope.Resolve<ICalc>(new TypedParameter(typeof(ICalcOperator), equationParser.Operator));
-                    result = calc.Calculate((double)equationParser.FirstOperand, (double)equationParser.SecondOperand);
-                }
+                result = _calcFlowManager.Calc(equation);
             }
+            catch(Exception ex)
+            {
+                return new JsonResult(new { Success = "False", responseText = ex.Message });
+            }
+
             return new JsonResult(Ok(result));
         }
     }

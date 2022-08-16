@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Q/szASz49o9glpiW2SSj2awacvBcKGQ6I6vpAXmXa9DKZVbyimGmdM7Z368IqS/HDUjh1E0/n3BoXLBHFJ6KlA==",
+  "dgSpecHash": "F0Iy5r8Rdije+2pm0bmmpLSeU8V23+AYZ0/VITQH2LSBtuI9WAjYcxn9ZMGyXJpbCh0F/oGhv7MyxbDJDAN/CQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\eli ran\\source\\repos\\Calc\\Calc.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\eli ran\\.nuget\\packages\\autofac\\6.4.0\\autofac.6.4.0.nupkg.sha512",
+    "C:\\Users\\eli ran\\.nuget\\packages\\autofac.extensions.dependencyinjection\\8.0.0\\autofac.extensions.dependencyinjection.8.0.0.nupkg.sha512",
+    "C:\\Users\\eli ran\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\eli ran\\.nuget\\packages\\system.diagnostics.diagnosticsource\\4.7.1\\system.diagnostics.diagnosticsource.4.7.1.nupkg.sha512"
   ],
   "logs": []

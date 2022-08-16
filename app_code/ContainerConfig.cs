@@ -1,26 +1,15 @@
 ﻿using Autofac;
 
-public class ContainerConfig
+public class AutofacContainerConfig: Module
 {
-    public static IContainer ConfigureController()
+
+    protected override void Load(ContainerBuilder builder)
     {
-        var builder = new ContainerBuilder();
-        builder.RegisterType<Calculator>().As<ICalc>();
         builder.RegisterType<EquationParser>().As<IEquationParser>();
-
-
-        return builder.Build();
-    }
-
-    public static IContainer ConfigureOperator()
-    {
-        var builder = new ContainerBuilder();
+        builder.RegisterType<CalcFlowManagerSimple>().As<ICalcFlowManager>();
         builder.RegisterType<Multiply>().Keyed<ICalcOperator>("X");
         builder.RegisterType<Divide>().Keyed<ICalcOperator>("/");
         builder.RegisterType<Add>().Keyed<ICalcOperator>("+");
         builder.RegisterType<Substract>().Keyed<ICalcOperator>("-");
-
-        return builder.Build();
     }
-
 }
