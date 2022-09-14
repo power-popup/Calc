@@ -46,6 +46,7 @@ public class Divide : ICalcOperator
 {
     public double Operate(double x, double y)
     {
+        // Whats going to happen if you not checking y == 0 ?
         if(y == 0)
         {
             throw new InvalidOperationException("Cannot divide in zero");
@@ -70,6 +71,7 @@ public class CalcFlowManagerSimple: ICalcFlowManager
     }
 }
 
+// What is the role of parser ?
 public class EquationParser: IEquationParser
 {
     private readonly IComponentContext _context;
